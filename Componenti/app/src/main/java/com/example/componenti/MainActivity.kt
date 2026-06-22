@@ -9,7 +9,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
@@ -34,6 +36,9 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.Center,
                 modifier =Modifier
                 .background(Color(0xFFBBDEFB))
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+
 
             ){   //lista dei componenti
                 Text(
@@ -50,7 +55,8 @@ class MainActivity : ComponentActivity() {
 
                 Button(
                     onClick = {
-                        println("Ho cliccato")
+                        //println("Ho cliccato")
+
                     }
                 ) {
                     Text(
@@ -81,21 +87,5 @@ class MainActivity : ComponentActivity() {
 
 
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComponentiTheme {
-        Greeting("Android")
     }
 }
