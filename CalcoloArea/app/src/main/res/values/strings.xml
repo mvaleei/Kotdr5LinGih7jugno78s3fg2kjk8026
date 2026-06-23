@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CalcolArea</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="sviluppatore">Mario Rossi</string>
 </resources>
