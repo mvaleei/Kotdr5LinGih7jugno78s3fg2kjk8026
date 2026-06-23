@@ -202,9 +202,9 @@ class MainActivity : ComponentActivity() {
                  */
 
                 DropDownList()
+                People()
+                Messaggio()
             }
-
-
 
         }
     }
@@ -317,6 +317,8 @@ fun DropDownList(){
     Text(
         text = "Sport preferito: $sportSelezionato"
     )
+
+
 }
 
 
