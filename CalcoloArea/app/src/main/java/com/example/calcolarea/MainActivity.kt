@@ -2,6 +2,7 @@ package com.example.calcolarea
 
 import androidx.compose.ui.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -32,11 +33,23 @@ import androidx.compose.ui.unit.dp
 import com.example.calcolarea.ui.theme.CalcolAreaTheme
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,15 +188,20 @@ class MainActivity : ComponentActivity() {
 
                      */
 
-                    Compmio()
-                    Citta()
+                    //Compmio()
+                    //Citta()
                 }
 
+                /*
                 Citta("Savona")
                 Citta("Genova")
                 listaCitta.forEach {
                     Citta(it)
                 }
+
+                 */
+
+                DropDownList()
             }
 
 
@@ -191,6 +209,117 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
+@Composable
+fun DropDownList(){
+
+
+    //dichiariamo gli stati da gestire
+
+    //la fvisualizzazione della lista
+    var collassato by remember {mutableStateOf((false))}
+
+    //una lista di sports da visualizzare nel dropdownlist
+    //può essere modificata
+    val sports =  remember { mutableListOf("Nuoto" ," Rugby" ," Tennis") }
+
+
+    //oggetto per contenere lo sport selezionato
+    var sportSelezionato by remember {mutableStateOf((""))}
+
+
+    //oggetto stato per gestire il dimensionamento
+    //dell'oggetto dropdownlist
+    var larghezzaOggetto by remember { mutableStateOf(Size.Zero) }
+
+
+    //oggetto per gestire l'icona della lista
+
+
+
+    Column(
+        Modifier.padding(20.dp)
+    ) {
+        //creiamo l'oggetto che servirà ad aprire la lista
+        OutlinedTextField(
+            value =sportSelezionato,
+            onValueChange = {sportSelezionato =it},
+            label ={
+                Text(
+                    text = "Seleziona uno sport"
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned{
+                    coordinate -> larghezzaOggetto =coordinate.size.toSize()
+                },
+            trailingIcon = {
+                Button(
+                    onClick = {
+                        collassato=!collassato
+                    }
+                ) {
+                    Text(
+                        text = "Apri"
+                    )
+                }
+
+
+                /*
+                Icon(
+                    null,
+                    "destription",
+                    Modifier.clickable{collassato=!collassato}
+                    )
+
+                 */
+            }
+
+        )
+
+
+        //creiamo il VERO oggetto per la grafica della lista
+        DropdownMenu(
+            expanded =  collassato,
+            onDismissRequest = {collassato = false},
+            modifier = Modifier
+                .width(with(LocalDensity.current){larghezzaOggetto.width.toDp()})
+        ) {
+            sports.forEach {
+                sportLetto ->
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = sportLetto
+                        )
+                    },
+                    onClick = {
+                        collassato=false
+                        sportSelezionato =sportLetto
+                        sports.add("Pallavolo")
+                        sports.add("Pallamano")
+
+                    }
+                )
+            }
+
+
+        }
+    }
+
+
+    Text(
+        text = "Numero di sport presenti: ${sports.size}"
+    )
+
+    Text(
+        text = "Sport preferito: $sportSelezionato"
+    )
+}
+
+
 
 
 @Composable
