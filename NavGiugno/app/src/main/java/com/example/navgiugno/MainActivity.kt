@@ -23,6 +23,13 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.example.navgiugno.ui.theme.NavGiugnoTheme
 
 class MainActivity : ComponentActivity() {
+
+    //creiamo oggetti per passare valori da un componen te all'altro
+    companion object {
+        var nomeutente:String ="mrossi"
+        var password:String ="Password"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,11 +63,16 @@ fun NavGiugnoApp() {
             }
         }
     ) {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+        Scaffold(modifier = Modifier) {
+            innerPadding ->
+            when (currentDestination){
+                AppDestinations.HOME -> Home(Modifier.padding(innerPadding))
+                AppDestinations.FAVORITES -> Favoriti(Modifier.padding(innerPadding))
+                AppDestinations.PROFILE -> Profilo(Modifier.padding(innerPadding))
+                AppDestinations.MIO -> Mio(Modifier.padding(innerPadding))
+            }
+
+
         }
     }
 }
@@ -68,10 +80,12 @@ fun NavGiugnoApp() {
 enum class AppDestinations(
     val label: String,
     val icon: Int,
+    val nome:String
 ) {
-    HOME("Home", R.drawable.ic_home),
-    FAVORITES("Favorites", R.drawable.ic_favorite),
-    PROFILE("Profile", R.drawable.ic_account_box),
+    HOME("Home", R.drawable.ic_home, nome = "Mario"),
+    FAVORITES("Favorites", R.drawable.ic_favorite,nome="Giorgio"),
+    PROFILE("Profile", R.drawable.ic_account_box,nome="Fabio"),
+    MIO("Mio comp",R.drawable.ic_home,nome="Alberto")
 }
 
 @Composable
