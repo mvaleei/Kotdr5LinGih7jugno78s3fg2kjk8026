@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var btAggiungi: Button
     lateinit var linguaggioSelezionato: TextView
 
+    lateinit var Nuovo: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         numeroElementi= findViewById(R.id.numeroElementi)
         btAggiungi=findViewById(R.id.btn_aggiungi)
         linguaggioSelezionato = findViewById(R.id.selezionato)
-
+        Nuovo= findViewById(R.id.Nuovo)
 
         //creo la lista e popolo la listview
         var linguaggi =arrayOf("C#","Java","Kotlin")
@@ -99,7 +101,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         //aggiungere linguaggi alla lista
         btAggiungi.setOnClickListener {
-            linguaggi += "Python"
+            //linguaggi += "Python"
+            linguaggi += Nuovo.text.toString()
             val adattaArray = ArrayAdapter(this,android.R.layout.simple_list_item_1, linguaggi)
             listato.adapter = adattaArray
             numeroElementi.text="Linguaggi presenti nella,lista: ${linguaggi.size.toString()}"
