@@ -14,8 +14,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.TextView
 import com.example.grafica.databinding.ActivityMainBinding
 
@@ -33,6 +35,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var btSottrai: Button
     lateinit var btDividi: Button
     lateinit var btMoltiplica: Button
+
+
+    //oggetti per la gestione di una lista (listview)
+    lateinit var listato: ListView
+    lateinit var numeroElementi: TextView
+    lateinit var btAggiungi: Button
+    lateinit var linguaggioSelezionato: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +70,40 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //l'interfaccia
         btSottrai.setOnClickListener {
             risultato.text = (Numero1.text.toString().toInt() -Numero2.text.toString().toInt()).toString()
+        }
+
+        //gestione listview
+        listato =findViewById(R.id.lista)
+        numeroElementi= findViewById(R.id.numeroElementi)
+        btAggiungi=findViewById(R.id.btn_aggiungi)
+        linguaggioSelezionato = findViewById(R.id.selezionato)
+
+
+        //creo la lista e popolo la listview
+        var linguaggi =arrayOf("C#","Java","Kotlin")
+
+        //creo le options che verranno messe nella select
+        val adattaArray = ArrayAdapter(this,android.R.layout.simple_list_item_1,linguaggi)
+
+        listato.adapter=adattaArray
+
+        numeroElementi.text="Linguaggi presenti nella,lista: ${linguaggi.size.toString()}"
+
+        //visualizzare l'elemento che si seleziona
+        listato.setOnItemClickListener{
+            parent, _, position,_ ->
+            val LinguaggioCliccato =parent.getItemAtPosition(position) as String
+            linguaggioSelezionato.text=LinguaggioCliccato
+        }
+
+
+        //aggiungere linguaggi alla lista
+        btAggiungi.setOnClickListener {
+            linguaggi += "Python"
+            val adattaArray = ArrayAdapter(this,android.R.layout.simple_list_item_1, linguaggi)
+            listato.adapter = adattaArray
+            numeroElementi.text="Linguaggi presenti nella,lista: ${linguaggi.size.toString()}"
+
         }
 
 
