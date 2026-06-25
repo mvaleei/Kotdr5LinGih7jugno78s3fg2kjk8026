@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <EditText
+            android:id="@+id/NumeroBase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:layout_margin="20dp"
+            android:inputType="number"
+            android:hint="Inserire il primo numero"
+            >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/NumeroSecondario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="20"
+            android:layout_margin="20dp"
+            android:hint="Inserire il secondo numero"
+            >
+
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btn_somma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Somma">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btn_sottrai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sottrai">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btn_dividi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dividi">
+
+            </Button>
+
+            <Button
+                android:id="@+id/btn_moltiplica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moltiplica">
+
+            </Button>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/risultato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calcolo:">
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
